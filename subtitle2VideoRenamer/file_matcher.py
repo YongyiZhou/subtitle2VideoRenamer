@@ -27,9 +27,8 @@ def match_and_rename_subtitle(video_map, subtitles):
         # 以视频的名字对字幕重命名
         language = ""
         if len(subtitle_partition) > 1:  # 截取语种
-            language = subtitle_partition[-2] + "."
-            if key in language:  # 处理那些没有语种后缀的情况
-                language = ""
+            if key not in subtitle_partition[-2]:  # 处理那些没有语种后缀的情况
+                language = subtitle_partition[-2] + "."
         new_name = '.'.join(video_map[key].split('.')[:-1]) + '.' + language + suffix
         os.rename(subtitle, new_name)
         print(f"subtitle renamed: \t{subtitle}")
